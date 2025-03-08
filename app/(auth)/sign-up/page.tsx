@@ -8,19 +8,19 @@ import {
 import { APP_NAME } from "@/lib/constants";
 import Image from "next/image";
 import Link from "next/link";
-import CredentialsSignInForm from "./credentials-signin-form";
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 import type { Metadata } from "next";
+import SignUpForm from "./sign-up-form";
 
 export const metadata: Metadata = {
-  title: "Sign In",
+  title: "Sign Up",
 };
 
-const SignInPage = async (props: {
+const SignUpPage = async (props: {
   searchParams: Promise<{
     callbackUrl: string;
-  }>
+  }>;
 }) => {
   const { callbackUrl } = await props.searchParams;
   const session = await auth();
@@ -42,17 +42,15 @@ const SignInPage = async (props: {
               height={100}
             />
           </Link>
-          <CardTitle className="text-center">Sign In</CardTitle>
+          <CardTitle className="text-center">Create Account</CardTitle>
           <CardDescription className="text-center">
-            Sign in to your account
+            Enter your details below to create your account
           </CardDescription>
         </CardHeader>
-        <CardContent className="space-y-4">
-          <CredentialsSignInForm />
-        </CardContent>
+        <CardContent className="space-y-4"><SignUpForm/></CardContent>
       </Card>
     </div>
   );
 };
 
-export default SignInPage;
+export default SignUpPage;
